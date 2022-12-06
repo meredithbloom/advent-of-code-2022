@@ -15,7 +15,8 @@ draw - 3 pts
 win - 6 pts
 ''' 
 
-input = open('test-input-day2.txt', 'r')
+#input = open('test-input-day2.txt', 'r')
+input = open('input-day-2.txt', 'r')
 rounds = input.read().split('\n')
 #print(rounds)
 
@@ -31,10 +32,15 @@ point_vals = {
 	'Z': 3
 }
 
+total_pts = 0
+
 for pair in rounds:
 	moves = tuple(pair.split())
-	move_pts = point_vals[moves[1]]
-	#print(moves, move_pts)
+	try:
+		move_pts = point_vals[moves[1]]
+	except IndexError:
+		print(moves)
+		break
 	round_pts = move_pts
 	if moves in opp_combos:
 		round_pts += 0
@@ -42,4 +48,8 @@ for pair in rounds:
 		round_pts += 6
 	elif moves in draws:
 		round_pts += 3
-	print(moves, round_pts)
+	total_pts += round_pts
+
+print(total_pts)
+
+# part 1 - 13502
