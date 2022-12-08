@@ -11,7 +11,8 @@ alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # uppercase A-Z - 27-52
 
 
-input1 = open('test-input-day3.txt', 'r')
+#input1 = open('test-input-day3.txt', 'r')
+input1 = open('input-day3.txt')
 # separate into three line groups
 
 lines = input1.read().split('\n')
@@ -25,6 +26,7 @@ def divide_groups(l, n):
 
 
 groups = list(divide_groups(lines, 3))
+#print(groups)
 badges = []
 
 
@@ -32,12 +34,15 @@ def find_priority(letter):
 	return alphabet.index(letter) + 1
 
 for g in groups:
-	first, second, third = Counter(g[0]), Counter(g[1]), Counter(g[2])
-	#print(first)
-	intersection = first & second
-	badge = intersection & third
-	#print(list(badge))
-	badges += list(badge)
+	try:
+		first, second, third = Counter(g[0]), Counter(g[1]), Counter(g[2])
+		#print(first)
+		intersection = first & second
+		badge = intersection & third
+		#print(list(badge))
+		badges += list(badge)
+	except IndexError:
+		break
 
 
 #print(badges)
