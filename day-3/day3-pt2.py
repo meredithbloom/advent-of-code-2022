@@ -4,6 +4,8 @@
 # find letter's priority 
 # sum priorities of duplicate objects 
 
+from collections import Counter
+
 alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # lowercase a-z - 1-26
 # uppercase A-Z - 27-52
@@ -23,6 +25,25 @@ def divide_groups(l, n):
 
 
 groups = list(divide_groups(lines, 3))
+badges = []
+
+
+def find_priority(letter):
+	return alphabet.index(letter) + 1
 
 for g in groups:
-	print(g)
+	first, second, third = Counter(g[0]), Counter(g[1]), Counter(g[2])
+	#print(first)
+	intersection = first & second
+	badge = intersection & third
+	#print(list(badge))
+	badges += list(badge)
+
+
+#print(badges)
+priorities = list(map(find_priority, badges))
+print(sum(priorities))
+
+	
+				
+		
